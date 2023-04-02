@@ -1,0 +1,12 @@
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\bin\Debug\net6.0\ShoppingList.Domain.deps.json
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\bin\Debug\net6.0\ShoppingList.Domain.dll
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\bin\Debug\net6.0\ref\ShoppingList.Domain.dll
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\bin\Debug\net6.0\ShoppingList.Domain.pdb
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.csproj.AssemblyReference.cache
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.AssemblyInfoInputs.cache
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.AssemblyInfo.cs
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.csproj.CoreCompileInputs.cache
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.dll
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ref\ShoppingList.Domain.dll
+D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Shared\obj\Debug\net6.0\ShoppingList.Domain.pdb

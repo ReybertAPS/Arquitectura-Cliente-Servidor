@@ -1,0 +1,63 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = ShoppingList.Client
+build_property.RootNamespace = ShoppingList.Client
+build_property.ProjectDir = D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Universidad Iberoamericano\Actividades semestre 5\Arquitectura de software\Actividad 3\ShoppingList\ShoppingList\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Pages/ShoppingListViews/CreateShoppingListView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0Vmlld3NcQ3JlYXRlU2hvcHBpbmdMaXN0Vmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Pages/ShoppingListViews/ModifyShoppingListView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0Vmlld3NcTW9kaWZ5U2hvcHBpbmdMaXN0Vmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Pages/ShoppingListViews/ShoppingListView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0Vmlld3NcU2hvcHBpbmdMaXN0Vmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Shared/HomeApplicationInformation.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhvbWVBcHBsaWNhdGlvbkluZm9ybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Shared/NotDataFound.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdERhdGFGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-6vsyw7a2qc
+
+[D:/Universidad Iberoamericano/Actividades semestre 5/Arquitectura de software/Actividad 3/ShoppingList/ShoppingList/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-g7kejaz96d

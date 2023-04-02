@@ -1,0 +1,99 @@
+﻿@page "/shopping-list"
+
+@using ShoppingList.Domain
+@using ShoppingList.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<PageTitle>Shopping List</PageTitle>
+
+<h1>Lista de Mercado</h1>
+
+<p>
+    En esta vista puedes gestionar tu lista de mercado, creando, modificando y eliminado artículos.
+    <br /> Y también puedes consultar la lista completa
+</p>
+
+<button class="btn btn-primary" @onclick="CreateNewShoppingList">Crear</button>
+
+@if (ShoppingListHeaders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    if (!ShoppingListHeaders.Any())
+    {
+        <NotDataFound Title="No hay información!" />
+        return;
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>CreatedDate</th>
+                <th>ShoppingTotalValue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shoppingListHeader in ShoppingListHeaders)
+            {
+                <tr>
+                    <td>@shoppingListHeader.Id</td>
+                    <td>@shoppingListHeader.Description</td>
+                    <td>@shoppingListHeader.CreatedDate.ToShortDateString()</td>
+                    <td>@shoppingListHeader.ShoppingTotalValue</td>
+                    <td><button class="btn btn-primary" @onclick="@(() => ModifyItem(shoppingListHeader))">Editar</button></td>
+                    <td><button class="btn btn-danger" @onclick="@(() => RemoveItem(shoppingListHeader))">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ShoppingListHeader> ShoppingListHeaders { get; set; }
+
+    private bool IsTrySaved { get; set; } = false;
+    private bool IsSaveSuccessfully { get; set; } = false;
+    private string SaveErrorMessage { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ShoppingListHeaders = await Http.GetFromJsonAsync<List<ShoppingListHeader>>("api/v1.0.0/shopping-list/get-all-shopping-list");
+    }
+
+    private void CreateNewShoppingList()
+    {
+        NavigationManager.NavigateTo("/shopping-list/create-shopping-list", true);
+    }
+
+    private async Task ModifyItem(ShoppingListHeader shoppingListHeader)
+    {
+        NavigationManager.NavigateTo($"/shopping-list/modify-shopping-list/{shoppingListHeader.Id}", true);
+    }
+
+    private async Task RemoveItem(ShoppingListHeader shoppingListHeader)
+    {
+        var response = await Http.DeleteAsync($"api/v1.0.0/shopping-list/delete-shopping-list/{shoppingListHeader.Id}");
+
+        IsTrySaved = true;
+
+        if (response.IsSuccessStatusCode)
+        {
+            ShoppingListHeaders = await Http.GetFromJsonAsync<List<ShoppingListHeader>>("api/v1.0.0/shopping-list/get-all-shopping-list");
+        }
+        else
+        {
+            IsSaveSuccessfully = false;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            SaveErrorMessage = "Error al guardar. " + content;
+        }
+    }
+}

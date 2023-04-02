@@ -1,0 +1,219 @@
+﻿@page "/shopping-list/modify-shopping-list/{Id:int}"
+
+@using ShoppingList.Domain
+@using ShoppingList.Shared
+@using System.Text.Json
+@using System.Text
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create Shopping List</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h3>Creación de Listas de Mercado</h3>
+
+    <button class="btn btn-primary" @onclick="OnSave">Guardar</button>
+</div>
+
+<br />
+
+@if (IsTrySaved)
+{
+    if (!IsSaveSuccessfully)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @SaveErrorMessage
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
+
+@if (HasActiveValidation)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @SaveErrorMessage
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<EditForm Model="@ShoppingListHeader">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="Id">ID</label>
+        <InputNumber id="Id" class="form-control" @bind-Value="ShoppingListHeader.Id" disabled="@true" />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Descripción</label>
+        <InputText id="Description" class="form-control" @bind-Value="ShoppingListHeader.Description" disabled="@true" />
+    </div>
+
+    <div class="form-group">
+        <label for="ShoppingTotalValue">Valor Total de la Lista</label>
+        <InputNumber id="ShoppingTotalValue" class="form-control" @bind-Value="ShoppingListHeader.ShoppingTotalValue" disabled="@true" />
+    </div>
+</EditForm>
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Agregar Productos a la Lista</h5>
+    </div>
+    <div class="card-body">
+        <EditForm Model="@ShoppingListDetail" OnValidSubmit="@ShoppingListDetailOnValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="ItemName">Nombre del Producto</label>
+                <InputText id="ItemName" class="form-control" @bind-Value="ShoppingListDetail.ItemName" />
+            </div>
+
+            <div class="form-group">
+                <label for="Quantity">Cantidad</label>
+                <InputNumber id="Quantity" class="form-control" @bind-Value="ShoppingListDetail.Quantity" />
+            </div>
+
+            <div class="form-group">
+                <label for="UnitValue">Valor Unitario</label>
+                <InputNumber id="UnitValue" class="form-control" @bind-Value="ShoppingListDetail.UnitValue" />
+            </div>
+
+            <div class="form-group">
+                <label for="TotalValue">Valor Total</label>
+                <InputNumber id="TotalValue" class="form-control" @bind-Value="ShoppingListDetail.TotalValue" disabled="@true" />
+            </div>
+
+            <br />
+
+            <button type="submit" class="btn btn-primary">Agregar Producto a La lista</button>
+        </EditForm>
+
+        <br />
+
+        <EditForm Model="@ShoppingListDetail">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Lista de productos</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Value</th>
+                                <th>Total Value</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ShoppingListDetails)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.ItemName</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.UnitValue</td>
+                                    <td>@item.TotalValue</td>
+                                    <td><button class="btn btn-danger" @onclick="@(() => RemoveItem(item))">Eliminar</button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ShoppingListHeader ShoppingListHeader = new ShoppingListHeader();
+
+    private ShoppingListDetail ShoppingListDetail = new ShoppingListDetail();
+
+    private List<ShoppingListDetail> ShoppingListDetails = new List<ShoppingListDetail>();
+
+    private bool IsTrySaved { get; set; } = false;
+    private bool IsSaveSuccessfully { get; set; } = false;
+    private string SaveErrorMessage { get; set; }
+
+    private bool HasActiveValidation { get; set; } = false;
+    private string ActiveValidationMessage { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        ShoppingListHeader = await Http.GetFromJsonAsync<ShoppingListHeader>($"api/v1.0.0/shopping-list/get-shopping-list/{Id}");
+
+        ShoppingListDetails = ShoppingListHeader.ShoppingListDetails.ToList();
+    }
+
+    private async Task ShoppingListDetailOnValidSubmit()
+    {
+        ShoppingListDetail.TotalValue = ShoppingListDetail.UnitValue * ShoppingListDetail.Quantity;
+
+        AddItem(ShoppingListDetail);
+
+        ShoppingListDetail = new ShoppingListDetail();
+    }
+
+    private void AddItem(ShoppingListDetail shoppingListDetail)
+    {
+        if (ShoppingListDetails.Where(d => d.ItemName == shoppingListDetail.ItemName).Any())
+        {
+            ActiveValidationMessage = $"El producto {shoppingListDetail.ItemName} ya se ha agregado a la lista";
+
+            HasActiveValidation = true;
+
+            return;
+        }
+
+        ShoppingListDetails.Add(shoppingListDetail);
+
+        ShoppingListHeader.ShoppingTotalValue = ShoppingListDetails.Sum(s => s.TotalValue);
+
+        ShoppingListHeader.ShoppingListDetails = ShoppingListDetails;
+    }
+
+    private void RemoveItem(ShoppingListDetail shoppingListDetail)
+    {
+        var item = ShoppingListDetails.Where(i => i.ItemName == shoppingListDetail.ItemName).FirstOrDefault();
+
+        if (item != null)
+            ShoppingListDetails.Remove(item);
+
+        ShoppingListHeader.ShoppingListDetails = ShoppingListDetails;
+    }
+
+    private async Task OnSave()
+    {
+        var serializedData = JsonSerializer.Serialize(ShoppingListHeader);
+        var response = await Http.PostAsync("api/v1.0.0/shopping-list/modify-shopping-list", new StringContent(serializedData, Encoding.UTF8, "application/json"));
+
+        IsTrySaved = true;
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/shopping-list", true);
+
+            IsSaveSuccessfully = true;
+        }
+        else
+        {
+            IsSaveSuccessfully = false;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            SaveErrorMessage = "Error al guardar. " + content;
+        }
+
+    }
+}
